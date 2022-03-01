@@ -25,26 +25,22 @@ describe("Create User", () => {
     });
 
     expect(createdUser).toHaveProperty("id");
+    expect(createdUser).toBe(201)
   });
 
   it("should not be able to create new user with name exists", () => {
     expect(async () => {
-      const user = {
-        name: "name user",
-        email: "email user",
-        password: "password user",
-      };
 
       await createUserUseCase.execute({
-        name: user.name,
-        email: user.email,
-        password: user.password,
+        name: "luis felipe",
+        email: "felipe@gmail.com",
+        password: "senha2"
       });
 
       await createUserUseCase.execute({
-        name: user.name,
-        email: user.email,
-        password: user.password,
+        name: "luis felipe 2",
+        email: "felipe@gmail.com",
+        password: "senha2"
       });
     }).rejects.toBeInstanceOf(CreateUserError);
   });
